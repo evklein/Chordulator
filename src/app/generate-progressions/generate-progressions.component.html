@@ -1,3 +1,19 @@
-<p>
-  generate-progressions works!
-</p>
+<div class="generate-progressions-container">
+  <div class="container">
+      <h2>Generate Random Chord Progressions</h2>
+      <form>
+        <label><h5>Random Key</h5></label><ui-switch size="small" color="red"></ui-switch>
+        <br>
+        <select class="selectpicker">
+          <option *ngFor="let note of notes">{{ note }}</option>
+        </select>
+        <br>
+        <div class="btn-group mood-buttons">
+            <button (click)="setKeyMood('major')" class="btn btn-primary btn-small">Major</button>
+            <button (click)="setKeyMood('minor')" class="btn btn-info btn-small">Minor</button>
+        </div>
+      </form>
+  </div>
+</div>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
