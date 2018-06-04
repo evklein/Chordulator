@@ -1,3 +1,7 @@
-body {
+body, html {
     background: navy !important;
+}
+
+router-outlet {
+    background-color: #E85F55;
 }

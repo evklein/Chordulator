@@ -1,3 +1,37 @@
-<p>
-  chords-in-key works!
-</p>
+<div class="chords-in-key">
+  <div class="container">
+    <h4>Select Key Note</h4>
+    <div class="input-group">
+      <div class="btn-group">
+          <button (click)="setKeyNote('C')" class="btn btn-primary btn-lg" style="background-color: red; border: 0px #E85F55">C</button>
+          <button (click)="setKeyNote('C#')" class="btn btn-primary btn-lg" style="background-color: orangered; border: 0px #E85F55">C#/D♭</button>
+          <button (click)="setKeyNote('D')" class="btn btn-primary btn-lg" style="background-color: #FFD300; border: 0px #E85F55">D</button>
+          <button (click)="setKeyNote('D#')" class="btn btn-primary btn-lg" style="background-color: yellowgreen; border: 0px #E85F55">D#/E♭</button>
+          <button (click)="setKeyNote('E')" class="btn btn-primary btn-lg" style="background-color: green; border: 0px #E85F55">E</button>
+          <button (click)="setKeyNote('F')" class="btn btn-primary btn-lg" style="background-color: lightskyblue; border: 0px #E85F55">F</button>
+          <button (click)="setKeyNote('F#')" class="btn btn-primary btn-lg" style="background-color: blue; border: 0px #E85F55">F#/G♭</button>
+          <button (click)="setKeyNote('G')" class="btn btn-primary btn-lg" style="background-color: indigo; border: 0px #E85F55">G</button>
+          <button (click)="setKeyNote('G#')" class="btn btn-primary btn-lg" style="background-color: purple; border: 0px #E85F55">G#/A♭</button>
+          <button (click)="setKeyNote('A')" class="btn btn-primary btn-lg" style="background-color: blueviolet; border: 0px #E85F55">A</button>
+          <button (click)="setKeyNote('A#')" class="btn btn-primary btn-lg" style="background-color: coral; border: 0px #E85F55">A#/B♭</button>
+          <button (click)="setKeyNote('B')" class="btn btn-primary btn-lg" style="background-color: pink; border: 0px #E85F55">B</button>
+      </div>
+    </div>
+    <h4>Select Key Mood</h4>
+    <div class="input-group">
+        <div class="btn-group">
+            <button (click)="setKeyMood('major')" class="btn btn-primary btn-lg">Major</button>
+            <button (click)="setKeyMood('minor')" class="btn btn-info btn-lg">Minor</button>
+        </div>
+    </div>
+    <div class="" *ngIf="isValid">
+      <br>
+      <h3>Chords in the key of <b><i>{{ keyNote }} {{ keyMood }}:</i></b></h3>
+      <div class="chord-container" *ngFor="let chord of chords">
+          <p class="chordName"><b>{{ chord.getKeyNote() }}{{ chord.getKeyMood() }}</b></p>
+          <p class="number"><b>{{ chord.getChordNumber() }}</b></p>
+      </div>
+    </div>
+  </div>
+</div>
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">

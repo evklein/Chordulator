@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { ChordsInKeyComponent } from './chords-in-key/chords-in-key.component';
 import { GenerateProgressionsComponent } from './generate-progressions/generate-progressions.component';
+import { ChordFinderService } from './services/chord-finder.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'chords-in-key', pathMatch: 'full'},
@@ -24,7 +25,7 @@ const appRoutes: Routes = [
     BrowserModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [ChordFinderService, ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
