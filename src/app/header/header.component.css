@@ -1,0 +1,30 @@
+h1 {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    margin-left: 50px;
+}
+
+li {
+    color: white;
+}
+
+.navbar-nav li a {
+    line-height: 75px;
+    font-size: 18px;
+    color: white;
+    margin-right: 50px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.navbar-nav li a:hover {
+    color: grey;
+}
+
+hr {
+    width: 75%;
+}
+
+.navbar-default {
+    background-color: #E85F55;
+}
+
