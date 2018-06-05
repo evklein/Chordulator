@@ -20,7 +20,7 @@ const appRoutes: Routes = [
     AppComponent,
     HeaderComponent,
     ChordsInKeyComponent,
-    GenerateProgressionsComponent
+    GenerateProgressionsComponent,
   ],
   imports: [
     BrowserModule,

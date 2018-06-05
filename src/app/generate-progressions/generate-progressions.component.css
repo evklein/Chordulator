@@ -18,3 +18,39 @@ ui-switch {
     margin-left: 15px;
     top: 5px;
 }
+
+select {
+    width: 150px;
+    height: 25px;
+    font-family: 'Arial';
+    border-radius: 5px;
+    margin-left: 20px;
+}
+
+form {
+    margin-left: 50px;
+}
+
+.chord-container {
+    width: 120px;
+    height: 140px;
+    border: solid 2px #E85F55;
+    border-radius: 8px;
+    background-color: white;
+    padding: 10px;
+    color: #E85F55;
+    font-family: 'Montserrat';
+    font-size: 24px;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+}
+
+.normal-mode {
+    height: 100px;
+}
+
+h3 {
+     color: white;
+     font-family: 'Montserrat';
+}

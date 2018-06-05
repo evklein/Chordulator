@@ -30,6 +30,10 @@ export class ChordFinderService {
     modeChordtypes = [this.majorChordTypes, this.dorianChordTypes, this.phrygianChordTypes, this.lydianChordTypes, this.mixolydianChordTypes, this.minorChordTypes, this.locrianChordTypes];
     modeChordNums = [this.majorChordNums, this.dorianChordNums, this.phrygianChordNums, this.lydianChordNums, this.mixolydianChordNums, this.minorChordNums, this.lydianChordNums];
 
+    public getNotes() {
+        return this.notes;
+    }
+
     public getChords(note: string, mood: string): Chord[] {
         if (mood === 'major') {
             return this.getMajorChords(note);
