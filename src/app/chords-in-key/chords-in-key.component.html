@@ -19,18 +19,27 @@
     </div>
     <h4>Select Key Mood</h4>
     <div class="input-group">
-        <div class="btn-group">
+        <div class="btn-group mood-buttons">
             <button (click)="setKeyMood('major')" class="btn btn-primary btn-lg">Major</button>
             <button (click)="setKeyMood('minor')" class="btn btn-info btn-lg">Minor</button>
         </div>
+        <ui-switch size="small" color="red" (change)="onChange($event)"></ui-switch><label><h5>Modal Interchange Mode</h5></label>
     </div>
-    <div class="" *ngIf="isValid">
+    <div class="" *ngIf="isNormalValid && !isModalInterchangeMode">
       <br>
       <h3>Chords in the key of <b><i>{{ keyNote }} {{ keyMood }}:</i></b></h3>
-      <div class="chord-container" *ngFor="let chord of chords">
+      <div class="chord-container normal-mode" *ngFor="let chord of chords">
           <p class="chordName"><b>{{ chord.getKeyNote() }}{{ chord.getKeyMood() }}</b></p>
           <p class="number"><b>{{ chord.getChordNumber() }}</b></p>
-          <p class="mode">Ionian</p>
+      </div>
+    </div>
+    <div class="" *ngIf="isModalInterchangeMode && keyNote">
+      <h3>Chords in every mode of <b><i>{{ keyNote }}:</i></b></h3>
+      <br>
+      <div class="chord-container" *ngFor="let chord of chords">
+        <p class="chordName"><b>{{ chord.getKeyNote() }}{{ chord.getKeyMood() }}</b></p>
+        <p class="number"><b>{{ chord.getChordNumber() }}</b></p>
+        <p class="mode">Ionian</p>
       </div>
       <br>
       <div class="chord-container dorian" *ngFor="let chord of dorianChords">

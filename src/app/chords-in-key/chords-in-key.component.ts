@@ -10,7 +10,8 @@ import { Chord } from '../services/chord.model';
 export class ChordsInKeyComponent implements OnInit {
   keyNote: string;
   keyMood: string;
-  isValid: boolean = false;
+  isNormalValid: boolean = false;
+  isModalInterchangeMode: boolean = false;
   chords: Chord[];
   dorianChords: Chord[];
   phrygianChords: Chord[];
@@ -34,19 +35,47 @@ export class ChordsInKeyComponent implements OnInit {
   }
 
   getChordsIfValid() {
-    if (!this.keyNote || !this.keyMood) {
-      this.isValid = false;
+    if (!this.keyNote) {
+      this.isNormalValid = false;
       return; // Don't post anything until user has added all the required information.
+    } else if (this.isModalInterchangeMode && this.keyNote) {
+      this.setModalChords();
+    } else if (this.keyNote && this.keyMood && !this.isModalInterchangeMode) {
+      this.isNormalValid = true;
+      this.resetChords();
+      this.chords = this.chordFinderService.getChords(this.keyNote, this.keyMood);
+    }
+  }
+
+  onChange(event: string) {
+    if (event) {
+      this.isModalInterchangeMode = true;
     } else {
-      this.isValid = true;
+      this.isModalInterchangeMode = false;
+      return;
     }
 
-    this.chords = this.chordFinderService.getChords(this.keyNote, this.keyMood);
+    this.setModalChords();
+  }
+
+  setModalChords() {
+    this.resetChords();
+    this.chords = this.chordFinderService.getChords(this.keyNote, 'major');
     this.dorianChords = this.chordFinderService.getDorianChords(this.keyNote);
     this.phrygianChords = this.chordFinderService.getPhygianChords(this.keyNote);
     this.lydianChords = this.chordFinderService.getLydianChords(this.keyNote);
     this.mixolydianChords = this.chordFinderService.getMixolydianChords(this.keyNote);
     this.minorChords = this.chordFinderService.getMinorChords(this.keyNote);
     this.locrianChords = this.chordFinderService.getLocrianChords(this.keyNote);
+  }
+
+  resetChords() {
+    this.chords = [];
+    this.dorianChords = [];
+    this.phrygianChords = [];
+    this.lydianChords = [];
+    this.mixolydianChords = [];
+    this.minorChords = [];
+    this.locrianChords = [];
   }
 }
