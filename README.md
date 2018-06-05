@@ -4,4 +4,4 @@ An easy to use tool for finding all the chords in a given key, finding chords ou
 
 More info coming soon!
 
-Built using Angular JS, no backend quite yet.
+Built using Angular 6, no backend quite yet.
