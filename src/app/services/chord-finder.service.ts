@@ -12,7 +12,7 @@ export class ChordFinderService {
     dorianChordNums = ['i', 'ii', 'III', 'IV', 'v', 'vi°', 'VII'];
     phrygianIntervals = [1, 2, 2, 2, 1, 2, 2];
     phrygianChordTypes = ['min', '', '', 'min', 'dim', '', 'min'];
-    phygianChordNums = ['i', 'II', 'III', 'iv', 'v°', 'VI', 'vii'];
+    phrygianChordNums = ['i', 'II', 'III', 'iv', 'v°', 'VI', 'vii'];
     lydianIntervals = [2, 2, 2, 1, 2, 2, 1];
     lydianChordTypes = ['', '', 'min', 'dim', '', 'min', 'min'];
     lydianChordNums = ['I', 'II', 'iii', 'iv°', 'V', 'vi', 'vii'];
@@ -28,7 +28,7 @@ export class ChordFinderService {
 
     modeIntervals = [this.majorIntervals, this.dorianIntervals, this.phrygianIntervals, this.lydianIntervals, this.mixolydianIntervals, this.minorIntervals, this.locrianIntervals];
     modeChordtypes = [this.majorChordTypes, this.dorianChordTypes, this.phrygianChordTypes, this.lydianChordTypes, this.mixolydianChordTypes, this.minorChordTypes, this.locrianChordTypes];
-    modeChordNums = [this.majorChordNums, this.dorianChordNums, this.phygianChordNums, this.lydianChordNums, this.mixolydianChordNums, this.minorChordNums, this.lydianChordNums];
+    modeChordNums = [this.majorChordNums, this.dorianChordNums, this.phrygianChordNums, this.lydianChordNums, this.mixolydianChordNums, this.minorChordNums, this.lydianChordNums];
 
     public getChords(note: string, mood: string): Chord[] {
         if (mood === 'major') {
@@ -56,31 +56,31 @@ export class ChordFinderService {
         return chords;
     }
 
-    private getMajorChords(note: string) {
+    public getMajorChords(note: string) {
         return this.getChordsForMode(note, this.majorIntervals, this.majorChordTypes, this.majorChordNums);
     }
 
-    private getDorianChords(note: string) {
+    public getDorianChords(note: string) {
         return this.getChordsForMode(note, this.dorianIntervals, this.dorianChordTypes, this.dorianChordNums);
     }
 
-    private getPhygianChords(note: string) {
-        return this.getChordsForMode(note, this.phrygianIntervals, this.phrygianChordTypes, this.phygianChordNums);
+    public getPhygianChords(note: string) {
+        return this.getChordsForMode(note, this.phrygianIntervals, this.phrygianChordTypes, this.phrygianChordNums);
     }
 
-    private getLydianChords(note: string) {
+    public getLydianChords(note: string) {
         return this.getChordsForMode(note, this.lydianIntervals, this.lydianChordTypes, this.lydianChordNums);
     }
 
-    private getMixolydianChords(note: string) {
+    public getMixolydianChords(note: string) {
         return this.getChordsForMode(note, this.mixolydianIntervals, this.mixolydianChordTypes, this.mixolydianChordNums);
     }
 
-    private getMinorChords(note: string) {
+    public getMinorChords(note: string) {
         return this.getChordsForMode(note, this.minorIntervals, this.minorChordTypes, this.minorChordNums);
     }
 
-    private getLocrianChords(note: string) {
+    public getLocrianChords(note: string) {
         return this.getChordsForMode(note, this.locrianIntervals, this.locrianChordTypes, this.locrianChordNums);
     }
 }

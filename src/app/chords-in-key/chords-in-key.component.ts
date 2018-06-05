@@ -12,6 +12,12 @@ export class ChordsInKeyComponent implements OnInit {
   keyMood: string;
   isValid: boolean = false;
   chords: Chord[];
+  dorianChords: Chord[];
+  phrygianChords: Chord[];
+  lydianChords: Chord[];
+  mixolydianChords: Chord[];
+  minorChords: Chord[];
+  locrianChords: Chord[];
 
   constructor(private chordFinderService: ChordFinderService) { }
 
@@ -36,5 +42,11 @@ export class ChordsInKeyComponent implements OnInit {
     }
 
     this.chords = this.chordFinderService.getChords(this.keyNote, this.keyMood);
+    this.dorianChords = this.chordFinderService.getDorianChords(this.keyNote);
+    this.phrygianChords = this.chordFinderService.getPhygianChords(this.keyNote);
+    this.lydianChords = this.chordFinderService.getLydianChords(this.keyNote);
+    this.mixolydianChords = this.chordFinderService.getMixolydianChords(this.keyNote);
+    this.minorChords = this.chordFinderService.getMinorChords(this.keyNote);
+    this.locrianChords = this.chordFinderService.getLocrianChords(this.keyNote);
   }
 }

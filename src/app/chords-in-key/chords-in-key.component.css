@@ -13,7 +13,7 @@ h3, h4 {
 
 .chord-container {
     width: 120px;
-    height: 100px;
+    height: 140px;
     border: solid 2px #E85F55;
     border-radius: 8px;
     background-color: white;
@@ -29,4 +29,32 @@ h3, h4 {
 
 .chord-container .chordName {
     font-size: 28px;
+}
+
+.dorian {
+    color: blue;
+}
+
+.phrygian {
+    color: lightskyblue;
+}
+
+.lydian {
+    color: green;
+}
+
+.mixolydian {
+    color: goldenrod;
+}
+
+.minor {
+    color: violet;
+}
+
+.locrian {
+    color: black;
+}
+
+.mode {
+    font-size: 14px;
 }

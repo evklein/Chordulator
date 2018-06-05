@@ -30,6 +30,43 @@
       <div class="chord-container" *ngFor="let chord of chords">
           <p class="chordName"><b>{{ chord.getKeyNote() }}{{ chord.getKeyMood() }}</b></p>
           <p class="number"><b>{{ chord.getChordNumber() }}</b></p>
+          <p class="mode">Ionian</p>
+      </div>
+      <br>
+      <div class="chord-container dorian" *ngFor="let chord of dorianChords">
+        <p class="chordName"><b>{{ chord.getKeyNote() }}{{ chord.getKeyMood() }}</b></p>
+        <p class="number"><b>{{ chord.getChordNumber() }}</b></p>
+        <p class="mode">Dorian</p>
+      </div>
+      <br>
+      <div class="chord-container phrygian" *ngFor="let chord of phrygianChords">
+        <p class="chordName"><b>{{ chord.getKeyNote() }}{{ chord.getKeyMood() }}</b></p>
+        <p class="number"><b>{{ chord.getChordNumber() }}</b></p>
+        <p class="mode">Phrygian</p>
+      </div>
+      <br>
+      <div class="chord-container lydian" *ngFor="let chord of lydianChords">
+        <p class="chordName"><b>{{ chord.getKeyNote() }}{{ chord.getKeyMood() }}</b></p>
+        <p class="number"><b>{{ chord.getChordNumber() }}</b></p>
+        <p class="mode">Lydian</p>
+      </div>
+      <br>
+      <div class="chord-container mixolydian" *ngFor="let chord of mixolydianChords">
+        <p class="chordName"><b>{{ chord.getKeyNote() }}{{ chord.getKeyMood() }}</b></p>
+        <p class="number"><b>{{ chord.getChordNumber() }}</b></p>
+        <p class="mode">Mixolydian</p>
+      </div>
+      <br>
+      <div class="chord-container minor" *ngFor="let chord of minorChords">
+        <p class="chordName"><b>{{ chord.getKeyNote() }}{{ chord.getKeyMood() }}</b></p>
+        <p class="number"><b>{{ chord.getChordNumber() }}</b></p>
+        <p class="mode">Aeolian</p>
+      </div>
+      <br>
+      <div class="chord-container locrian" *ngFor="let chord of locrianChords">
+        <p class="chordName"><b>{{ chord.getKeyNote() }}{{ chord.getKeyMood() }}</b></p>
+        <p class="number"><b>{{ chord.getChordNumber() }}</b></p>
+        <p class="mode">Locrian</p>
       </div>
     </div>
   </div>
