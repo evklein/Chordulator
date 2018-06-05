@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChordFinderService } from '../services/chord-finder.service';
 import { NgForm } from '@angular/forms';
-import { Chord } from '../services/chord.model';
+import { Chord } from '../models/chord.model';
 
 @Component({
   selector: 'app-generate-progressions',

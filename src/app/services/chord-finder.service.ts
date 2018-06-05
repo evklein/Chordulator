@@ -1,8 +1,8 @@
-import { Chord } from "./chord.model";
+import { Chord } from "../models/chord.model";
 
 export class ChordFinderService {
-    notes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#']
-    modes = ['Ionian', 'Dorian', 'Phrygian', 'Lydian', 'Mixolydian', 'Aeolian', 'Locrian']
+    notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    modes = ['Ionian', 'Dorian', 'Phrygian', 'Lydian', 'Mixolydian', 'Aeolian', 'Locrian'];
     
     majorIntervals = [2, 2, 1, 2, 2, 2, 1];
     majorChordTypes = ['', 'min', 'min', '', '', 'min', 'dim'];

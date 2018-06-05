@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChordFinderService } from '../services/chord-finder.service';
-import { Chord } from '../services/chord.model';
+import { Chord } from '../models/chord.model';
 
 @Component({
   selector: 'app-chords-in-key',
