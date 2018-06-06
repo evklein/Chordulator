@@ -16,6 +16,7 @@ export class GenerateProgressionsComponent implements OnInit {
   progressionGenerated: boolean = false;
   keyNote: string;
   keyMood: string;
+  selectedKey: string = 'C';
 
   constructor(private chordFinderService: ChordFinderService) { }
 
@@ -27,7 +28,7 @@ export class GenerateProgressionsComponent implements OnInit {
     if (this.randomKey) {
       key = this.getRandomKey();
     } else {
-      // set key to whatever selector is on
+      key = this.selectedKey;
     }
 
     let keyChords: Chord[];
@@ -64,4 +65,8 @@ export class GenerateProgressionsComponent implements OnInit {
     }
   }
 
+  onToggleRandomSwitch(event: boolean) {
+    this.randomKey = event;
+    console.log(this.randomKey);
+  }
 }

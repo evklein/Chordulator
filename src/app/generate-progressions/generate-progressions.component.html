@@ -2,8 +2,8 @@
   <div class="container">
       <h2>Generate Random Chord Progressions</h2>
       <form class="form" (ngSubmit)="onSubmit()">
-        <label><h5>Random Key</h5></label><ui-switch size="small" color="#E85F55" checked></ui-switch>
-        <select class="selector" disabled>
+        <label><h5>Random Key</h5></label><ui-switch size="small" color="#E85F55" [checked]="randomKey" (change)="onToggleRandomSwitch($event)"></ui-switch>
+        <select class="selector" [disabled]="randomKey" [(ngModel)]="selectedKey" [ngModelOptions]="{standalone: true}">
           <option *ngFor="let note of chordFinderService.getNotes()">{{ note }}</option>
         </select>
         <br><br>
