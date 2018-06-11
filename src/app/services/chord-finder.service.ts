@@ -1,7 +1,7 @@
 import { Chord } from "../models/chord.model";
 
 export class ChordFinderService {
-    notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    notes = ['C', 'C#', 'D', 'E♭', 'E', 'F', 'F#', 'G', 'G#', 'A', 'B♭', 'B'];
     modes = ['Ionian', 'Dorian', 'Phrygian', 'Lydian', 'Mixolydian', 'Aeolian', 'Locrian'];
     
     majorIntervals = [2, 2, 1, 2, 2, 2, 1];
@@ -42,7 +42,7 @@ export class ChordFinderService {
         }
     }
 
-    public getChordsForMode(note: string, intervals: number[], chordTypes: string[], chordNums: string[]): Chord[] {
+    public getChordsForMode(note: string, intervals: number[], chordTypes: string[], chordNums: string[], mode: string): Chord[] {
         let keyIndex = 0;
         for (let i = 0; i < this.notes.length; i++) {
             if (this.notes[i] == note) {
@@ -50,41 +50,42 @@ export class ChordFinderService {
             }
         }
 
-        let chords: Chord[] = [new Chord(note, chordTypes[0], chordNums[0])];
+        let chords: Chord[] = [new Chord(note, chordTypes[0], chordNums[0], mode)];
         for (let i = 0; i < intervals.length - 1; i++) {
             keyIndex += intervals[i];
             if (keyIndex >= this.notes.length) keyIndex -= this.notes.length
-            chords.push(new Chord(this.notes[keyIndex], chordTypes[i + 1], chordNums[i + 1]))
+            chords.push(new Chord(this.notes[keyIndex], chordTypes[i + 1], chordNums[i + 1], mode));
         }
 
         return chords;
     }
 
     public getMajorChords(note: string) {
-        return this.getChordsForMode(note, this.majorIntervals, this.majorChordTypes, this.majorChordNums);
+        console.log('made it');
+        return this.getChordsForMode(note, this.majorIntervals, this.majorChordTypes, this.majorChordNums, 'Ionian');
     }
 
     public getDorianChords(note: string) {
-        return this.getChordsForMode(note, this.dorianIntervals, this.dorianChordTypes, this.dorianChordNums);
+        return this.getChordsForMode(note, this.dorianIntervals, this.dorianChordTypes, this.dorianChordNums, 'Dorian');
     }
 
     public getPhygianChords(note: string) {
-        return this.getChordsForMode(note, this.phrygianIntervals, this.phrygianChordTypes, this.phrygianChordNums);
+        return this.getChordsForMode(note, this.phrygianIntervals, this.phrygianChordTypes, this.phrygianChordNums, 'Phrygian');
     }
 
     public getLydianChords(note: string) {
-        return this.getChordsForMode(note, this.lydianIntervals, this.lydianChordTypes, this.lydianChordNums);
+        return this.getChordsForMode(note, this.lydianIntervals, this.lydianChordTypes, this.lydianChordNums, 'Lydian');
     }
 
     public getMixolydianChords(note: string) {
-        return this.getChordsForMode(note, this.mixolydianIntervals, this.mixolydianChordTypes, this.mixolydianChordNums);
+        return this.getChordsForMode(note, this.mixolydianIntervals, this.mixolydianChordTypes, this.mixolydianChordNums, 'Mixolydian');
     }
 
     public getMinorChords(note: string) {
-        return this.getChordsForMode(note, this.minorIntervals, this.minorChordTypes, this.minorChordNums);
+        return this.getChordsForMode(note, this.minorIntervals, this.minorChordTypes, this.minorChordNums, 'Aeolian');
     }
 
     public getLocrianChords(note: string) {
-        return this.getChordsForMode(note, this.locrianIntervals, this.locrianChordTypes, this.locrianChordNums);
+        return this.getChordsForMode(note, this.locrianIntervals, this.locrianChordTypes, this.locrianChordNums, 'Locrian');
     }
 }

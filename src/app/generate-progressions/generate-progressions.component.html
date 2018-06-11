@@ -14,12 +14,12 @@
         <br><br>
         <div class="container modal-interchange-sliders">
           <h5 class="title"><b>Allow Chords from the Following Modes</b></h5>
-          <label><h5>Ionian</h5></label><ui-switch size="small" color="gold" [checked]="ionianChecked" (change)="onToggleModeSwitch('ionian')"></ui-switch>
+          <label><h5>Ionian</h5></label><ui-switch size="small" color="gold" [disabled]="ionianDisabled" [checked]="ionianChecked" (change)="onToggleModeSwitch('ionian')"></ui-switch>
           <label><h5>Dorian</h5></label><ui-switch size="small" color="blue" [checked]="dorianChecked" (change)="onToggleModeSwitch('dorian')"></ui-switch>
           <label><h5>Phrygian</h5></label><ui-switch size="small" color="red" [checked]="phrygianChecked" (change)="onToggleModeSwitch('phrygian')"></ui-switch>
           <label><h5>Lydian</h5></label><ui-switch size="small" color="purple" [checked]="lydianChecked" (change)="onToggleModeSwitch('lydian')"></ui-switch>
           <label><h5>Mixolydian</h5></label><ui-switch size="small" color="green" [checked]="mixolydianChecked" (change)="onToggleModeSwitch('mixolydian')"></ui-switch>
-          <label><h5>Aeolian</h5></label><ui-switch size="small" color="#FF4500" [checked]="aeolianChecked" (change)="onToggleModeSwitch('aeolian')"></ui-switch>
+          <label><h5>Aeolian</h5></label><ui-switch size="small" color="#FF4500" [disabled]="aeolianDisabled" [checked]="aeolianChecked" (change)="onToggleModeSwitch('aeolian')"></ui-switch>
           <label><h5>Locrian</h5></label><ui-switch size="small" color="black" [checked]="locrianChecked" (change)="onToggleModeSwitch('locrian')"></ui-switch>
         </div>
         <button type="submit" class="btn btn-success">Generate Chord Progression</button>
@@ -29,6 +29,7 @@
         <div class="chord-container normal-mode" *ngFor="let chord of chords">
             <p class="chordName"><b>{{ chord.getKeyNote() }}{{ chord.getKeyMood() }}</b></p>
             <p class="number"><b>{{ chord.getChordNumber() }}</b></p>
+            <p class="mode"><b>{{ chord.getMode() }}</b></p>
         </div>
       </div>
   </div>

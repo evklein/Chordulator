@@ -17,6 +17,7 @@ export class GenerateProgressionsComponent implements OnInit {
   keyNote: string;
   keyMood: string;
   selectedKey: string = 'C';
+
   ionianChecked: boolean = true;
   dorianChecked: boolean = false;
   phrygianChecked: boolean = false;
@@ -24,6 +25,9 @@ export class GenerateProgressionsComponent implements OnInit {
   mixolydianChecked: boolean = false;
   aeolianChecked: boolean = false;
   locrianChecked: boolean = false;
+  ionianDisabled: boolean = true;
+  aeolianDisabled: boolean = false;
+
 
   constructor(private chordFinderService: ChordFinderService) { }
 
@@ -31,35 +35,65 @@ export class GenerateProgressionsComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     this.chords = []; // Reset chords.
-    let key;
-    if (this.randomKey) {
-      key = this.getRandomKey();
-    } else {
-      key = this.selectedKey;
-    }
+    let key = this.getKey();
 
-    let keyChords: Chord[];
-    if (this.majorSelected) {
-      keyChords = this.chordFinderService.getChords(key, 'major');
-      this.keyMood = 'major';
-    }
-    else if (this.minorSelected) {
-      keyChords = this.chordFinderService.getChords(key, 'minor');
-      this.keyMood = 'minor';
-    }
+    let keyChords: Chord[] = this.getAllChords(key);
+    // if (this.majorSelected) {
+    //   keyChords = this.chordFinderService.getChords(key, 'major');
+    //   this.keyMood = 'major';
+    // }
+    // else if (this.minorSelected) {
+    //   keyChords = this.chordFinderService.getChords(key, 'minor');
+    //   this.keyMood = 'minor';
+    // }
+    const MIN_NUM_CHORDS = 2;
+    const MAX_NUM_CHORDS = 5;
+    let numOfChords = MIN_NUM_CHORDS + Math.floor(Math.random() * MAX_NUM_CHORDS); // 2 - 6 chords, add slider later for users. 
 
-    let numOfChords = 2 + Math.floor(Math.random() * 5); // 2 - 6 chords, add slider later for users.
     for (let i = 0; i < numOfChords; i++) {
-      let randomChordIndex = Math.floor(Math.random() * 7); // 7 poss. chords in each chord.
+      let randomChordIndex = Math.floor(Math.random() * keyChords.length);
       this.chords.push(keyChords[randomChordIndex]);
     }
     this.keyNote = key;
     this.progressionGenerated = true;
   }
 
-  private getRandomKey() {
-    let notes = this.chordFinderService.getNotes();
-    return notes[Math.floor(Math.random() * notes.length)];
+  private getKey() {
+    let key;
+    if (this.randomKey) {
+      let notes = this.chordFinderService.getNotes();
+      return notes[Math.floor(Math.random() * notes.length)];
+    } else {
+      return this.selectedKey;
+    }
+  }
+
+  private getAllChords(key: string) {
+    let chords: Chord[] = [];
+
+    if (this.ionianChecked) {
+      chords.push.apply(chords, this.chordFinderService.getMajorChords(key));
+    }
+    if (this.dorianChecked) {
+      chords.push.apply(chords, this.chordFinderService.getDorianChords(key));
+    }
+    if (this.phrygianChecked) {
+      chords.push.apply(chords, this.chordFinderService.getPhygianChords(key));
+    }
+    if (this.lydianChecked) {
+      chords.push.apply(chords, this.chordFinderService.getLydianChords(key));
+    }
+    if (this.mixolydianChecked) {
+      chords.push.apply(chords, this.chordFinderService.getMixolydianChords(key));
+    }
+    if (this.aeolianChecked) {
+      chords.push.apply(chords, this.chordFinderService.getMinorChords(key));
+    }
+    if (this.locrianChecked) {
+      chords.push.apply(chords, this.chordFinderService.getLocrianChords(key));
+    }
+
+    return chords;
   }
 
   private setKeyMood(mood: string) {
@@ -67,14 +101,18 @@ export class GenerateProgressionsComponent implements OnInit {
     if (mood === 'major') {
       this.minorSelected = false;
       this.majorSelected = true;
+      this.aeolianDisabled = false;
       this.ionianChecked = true;
+      this.ionianDisabled = true;
     } else if (mood === 'minor') {
       this.minorSelected = true;
       this.majorSelected = false;
+      this.ionianDisabled = false;
       this.aeolianChecked = true;
+      this.aeolianDisabled = true;
     }
   }
-
+  
   onToggleRandomSwitch(event: boolean) {
     this.randomKey = event;
     console.log(this.randomKey);
