@@ -9,9 +9,11 @@ import { Chord } from '../models/chord.model';
 })
 export class ChordsInKeyComponent implements OnInit {
   keyNote: string;
-  keyMood: string;
+  keyMood: string = 'major';
   isNormalValid: boolean = false;
   isModalInterchangeMode: boolean = false;
+  majorSelected: boolean = true;
+  minorSelected: boolean = false;
   chords: Chord[];
   dorianChords: Chord[];
   phrygianChords: Chord[];
@@ -30,6 +32,14 @@ export class ChordsInKeyComponent implements OnInit {
   }
 
   setKeyMood(mood: string) {
+    if (mood === 'major') {
+      this.majorSelected = true;
+      this.minorSelected = false;
+    } else {
+      this.minorSelected = true;
+      this.majorSelected = false;
+    }
+
     this.keyMood = mood;
     this.getChordsIfValid();
   }
