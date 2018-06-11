@@ -17,6 +17,13 @@ export class GenerateProgressionsComponent implements OnInit {
   keyNote: string;
   keyMood: string;
   selectedKey: string = 'C';
+  ionianChecked: boolean = true;
+  dorianChecked: boolean = false;
+  phrygianChecked: boolean = false;
+  lydianChecked: boolean = false;
+  mixolydianChecked: boolean = false;
+  aeolianChecked: boolean = false;
+  locrianChecked: boolean = false;
 
   constructor(private chordFinderService: ChordFinderService) { }
 
@@ -56,17 +63,56 @@ export class GenerateProgressionsComponent implements OnInit {
   }
 
   private setKeyMood(mood: string) {
+    this.resetSwitches();
     if (mood === 'major') {
       this.minorSelected = false;
       this.majorSelected = true;
+      this.ionianChecked = true;
     } else if (mood === 'minor') {
       this.minorSelected = true;
       this.majorSelected = false;
+      this.aeolianChecked = true;
     }
   }
 
   onToggleRandomSwitch(event: boolean) {
     this.randomKey = event;
     console.log(this.randomKey);
+  }
+
+  onToggleModeSwitch(mode: string) {
+    switch (mode) {
+      case 'ionian':
+        this.ionianChecked = !this.ionianChecked;
+        break;
+      case 'dorian':
+        this.dorianChecked = !this.dorianChecked;
+        break;
+      case 'phrygian':
+        this.phrygianChecked = !this.phrygianChecked;
+        break;
+      case 'lydian':
+        this.lydianChecked = !this.lydianChecked;
+        break;
+      case 'mixolydian':
+        this.mixolydianChecked = !this.mixolydianChecked;
+        break;
+      case 'aeolian':
+        this.aeolianChecked = !this.aeolianChecked;
+        break;
+      case 'locrian':
+        this.locrianChecked = !this.locrianChecked;
+        break;
+    }
+  }
+
+  resetSwitches() {
+    this.ionianChecked = false;
+    this.dorianChecked = false;
+    this.phrygianChecked = false;
+    this.lydianChecked = false;
+    this.mixolydianChecked = false;
+    this.aeolianChecked = false;
+    this.locrianChecked = false;
   }
 }
