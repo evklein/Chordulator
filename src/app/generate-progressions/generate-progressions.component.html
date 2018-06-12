@@ -7,6 +7,8 @@
           <option *ngFor="let note of chordFinderService.getNotes()">{{ note }}</option>
         </select>
         <br><br>
+        <label><h5>Always Include Root Chord</h5></label><ui-switch size="small" color="#E85F55" [checked]="alwaysUseRoot" (change)="onToggleUseRoot($event)"></ui-switch>
+        <br><br>
         <div class="btn-group mood-buttons">
             <button (click)="setKeyMood('major')" class="btn btn-primary btn-small">Major <i class="fas fa-check" *ngIf="majorSelected"></i></button>
             <button (click)="setKeyMood('minor')" class="btn btn-info btn-small">Minor <i class="fas fa-check" *ngIf="minorSelected"></i></button>
@@ -24,12 +26,18 @@
         </div>
         <button type="submit" class="btn btn-success">Generate Chord Progression</button>
       </form>
+      <h3 *ngIf="progressionGenerated">Chord progression in <b><i>{{ keyNote }} {{ keyMood }}:</i></b></h3>
       <div class="generatedResult" *ngIf="progressionGenerated">
-        <h3>Chord progression in <b><i>{{ keyNote }} {{ keyMood }}:</i></b></h3>
         <div class="chord-container normal-mode" *ngFor="let chord of chords">
             <p class="chordName"><b>{{ chord.getKeyNote() }}{{ chord.getKeyMood() }}</b></p>
             <p class="number"><b>{{ chord.getChordNumber() }}</b></p>
-            <p class="mode"><b>{{ chord.getMode() }}</b></p>
+            <p class="mode" style="color: gold"><b *ngIf="chord.isIonian">Ionian</b></p>
+            <p class="mode" style="color: blue"><b *ngIf="chord.isDorian">Dorian</b></p>
+            <p class="mode" style="color: red"><b *ngIf="chord.isPhrygian">Phrygian</b></p>
+            <p class="mode" style="color: purple"><b *ngIf="chord.isLydian">Lydian</b></p>
+            <p class="mode" style="color: green"><b *ngIf="chord.isMixolydian">Mixolydian</b></p>
+            <p class="mode" style="color: #FF4500"><b *ngIf="chord.isAeolian">Aeolian</b></p>
+            <p class="mode" style="color: black"><b *ngIf="chord.isLocrian">Locrian</b></p>
         </div>
       </div>
   </div>

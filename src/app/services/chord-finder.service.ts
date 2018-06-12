@@ -61,7 +61,6 @@ export class ChordFinderService {
     }
 
     public getMajorChords(note: string) {
-        console.log('made it');
         return this.getChordsForMode(note, this.majorIntervals, this.majorChordTypes, this.majorChordNums, 'Ionian');
     }
 

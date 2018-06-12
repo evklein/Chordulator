@@ -93,6 +93,26 @@ export class GenerateProgressionsComponent implements OnInit {
       chords.push.apply(chords, this.chordFinderService.getLocrianChords(key));
     }
 
+    return this.handleDuplicateChords(chords);
+  }
+
+  private handleDuplicateChords(chords: Chord[]) {
+    for (let i = 0; i < chords.length; i++) {
+      for (let j = 0; j < chords.length; j++) {
+        if (i === j) continue;
+
+        if (chords[i].getChordName() === chords[j].getChordName()) {
+          if (chords[j].isIonian) chords[i].isIonian = true;
+          if (chords[j].isDorian) chords[i].isDorian = true;
+          if (chords[j].isPhrygian) chords[i].isPhrygian = true;
+          if (chords[j].isLydian) chords[i].isLydian = true;
+          if (chords[j].isMixolydian) chords[i].isMixolydian = true;
+          if (chords[j].isAeolian) chords[i].isAeolian = true;
+          if (chords[j].isLocrian) chords[i].isLocrian = true;
+          chords.splice(j, 1);
+        }
+      }
+    }
     return chords;
   }
 
