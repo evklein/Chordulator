@@ -14,7 +14,7 @@ import { MatSlider, MatSliderModule } from '@angular/material/slider';
 const appRoutes: Routes = [
   { path: '', redirectTo: 'chords-in-key', pathMatch: 'full'},
   { path: 'chords-in-key', component: ChordsInKeyComponent },
-  { path: 'generate-progressions', component: GenerateProgressionsComponent }
+  { path: 'chords-in-key', component: GenerateProgressionsComponent }
 ]
 
 @NgModule({
