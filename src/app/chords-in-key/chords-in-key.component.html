@@ -36,7 +36,7 @@
     <div class="" *ngIf="isModalInterchangeMode && keyNote">
       <h3>Chords in every mode of <b><i>{{ keyNote }}:</i></b></h3>
       <br>
-      <div class="chord-container" *ngFor="let chord of chords">
+      <div class="chord-container major" *ngFor="let chord of chords">
         <p class="chordName"><b>{{ chord.getKeyNote() }}{{ chord.getKeyMood() }}</b></p>
         <p class="number"><b>{{ chord.getChordNumber() }}</b></p>
         <p class="mode">Ionian</p>

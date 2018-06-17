@@ -20,6 +20,7 @@ export class GenerateProgressionsComponent implements OnInit {
   keyNote: string;
   keyMood: string = 'major';
   selectedKey: string = 'C';
+  chordNumber: number = 3;
 
   ionianChecked: boolean = true;
   dorianChecked: boolean = false;
@@ -41,9 +42,7 @@ export class GenerateProgressionsComponent implements OnInit {
     let key = this.getKey();
 
     let keyChords: Chord[] = this.getAllChords(key);
-    const MIN_NUM_CHORDS = 2;
-    const MAX_NUM_CHORDS = 5;
-    let numOfChords = MIN_NUM_CHORDS + Math.floor(Math.random() * MAX_NUM_CHORDS); // 2 - 6 chords, add slider later for users. 
+    let numOfChords = this.chordNumber;
     let rootChordIndex = Math.floor(Math.random() * numOfChords);
 
     for (let i = 0; i < numOfChords; i++) {
@@ -187,5 +186,9 @@ export class GenerateProgressionsComponent implements OnInit {
 
   onToggleUseDiminishedChords(value: boolean) {
     this.includeDiminishedChords = value;
+  }
+  
+  onMoveSlider(slider) {
+    this.chordNumber = slider.value;
   }
 }

@@ -98,3 +98,22 @@ h3 {
     font-size: 14px;
     margin: 0;
 }
+
+/* Styling for the stupid Angular material slider. */
+::ng-deep mat-slider {
+    margin-left: 10px;
+    color: #E85F55;
+}
+
+::ng-deep .mat-accent .mat-slider-thumb {
+    background-color: white;
+    color: #E85F55;
+} 
+::ng-deep .mat-accent .mat-slider-thumb-label {
+    background-color: #E02218;
+    color: #E85F55;
+} 
+::ng-deep .mat-accent .mat-slider-track-fill {
+    background-color: white;
+    color: #E85F55;
+} 

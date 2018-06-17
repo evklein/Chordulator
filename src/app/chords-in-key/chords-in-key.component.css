@@ -2,6 +2,10 @@ body {
     background-color: #E85F55;
 }
 
+.container {
+    overflow-y: hidden;
+}
+
 .chords-in-key {
     background-color: #E85F55;
 }
@@ -40,24 +44,28 @@ ui-switch {
     font-size: 28px;
 }
 
+.major {
+    color: #E2B500;
+}
+
 .dorian {
     color: blue;
 }
 
 .phrygian {
-    color: lightskyblue;
+    color: red;
 }
 
 .lydian {
-    color: green;
+    color: purple;
 }
 
 .mixolydian {
-    color: goldenrod;
+    color: green;
 }
 
 .minor {
-    color: violet;
+    color: orangered;
 }
 
 .locrian {
@@ -70,4 +78,16 @@ ui-switch {
 
 .mood-buttons {
     margin-right: 20px;
+}
+
+
+.chord-container:hover {
+    color: white;
+    background-color: #E85F55;
+    border: solid 1px white;
+
+    -webkit-transition: background-color 0.5s ease-out;
+    -moz-transition: background-color 0.5s ease-out;
+    -o-transition: background-color 0.5s ease-out;
+    transition: background-color 0.5s ease-out;
 }
