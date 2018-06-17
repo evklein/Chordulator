@@ -14,6 +14,7 @@ export class GenerateProgressionsComponent implements OnInit {
   minorSelected: boolean = false;
   randomKey: boolean = true;
   useRoot: boolean = true;
+  includeDiminishedChords: boolean = true;
   chords: Chord[] = [];
   progressionGenerated: boolean = false;
   keyNote: string;
@@ -50,7 +51,14 @@ export class GenerateProgressionsComponent implements OnInit {
         this.chords.push(keyChords[0]);
         continue;
       }
+      
       let randomChordIndex = Math.floor(Math.random() * keyChords.length);
+      let chordToPush = keyChords[randomChordIndex];
+      while (chordToPush.getKeyMood() === 'dim' && !this.includeDiminishedChords) {
+        randomChordIndex = Math.floor(Math.random() * keyChords.length);
+        chordToPush = keyChords[randomChordIndex];
+      }
+
       this.chords.push(keyChords[randomChordIndex]);
     }
     this.keyNote = key;
@@ -175,5 +183,9 @@ export class GenerateProgressionsComponent implements OnInit {
 
   onToggleUseRoot(value: boolean) {
     this.useRoot = value;
+  }
+
+  onToggleUseDiminishedChords(value: boolean) {
+    this.includeDiminishedChords = value;
   }
 }

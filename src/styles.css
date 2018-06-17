@@ -4,4 +4,5 @@
 /* You can add global styles to this file, and also import other style files */
 html, body, .container, app-chords-in-key {
     background-color: #E85F55;
+    overflow-x: hidden !important;
 }

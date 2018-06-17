@@ -9,7 +9,7 @@
         <br><br>
         <label><h5>Always Include Root Chord</h5></label><ui-switch size="small" color="#E85F55" [checked]="alwaysUseRoot" (change)="onToggleUseRoot($event)"></ui-switch>
         <br><br>
-        <label><h5>Include Diminished Chords</h5></label><ui-switch size="small" color="#E85F55" [checked]="true" (change)="onToggleUseDiminishedChords($event)"></ui-switch>
+        <label><h5>Include Diminished Chords</h5></label><ui-switch size="small" color="#E85F55" [checked]="includeDiminishedChords" (change)="onToggleUseDiminishedChords($event)"></ui-switch>
         <br><br>
         <label><h5>Number of Chords</h5></label><mat-slider thumbLabel [displayWith]="formatLabel" min="2000" max="7000" step="1" value="3000"></mat-slider>
         <br><br>
