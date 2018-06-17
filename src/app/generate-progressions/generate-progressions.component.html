@@ -1,4 +1,4 @@
-<div class="generate-progressions-container">
+<div class="generate-progressions-container mat-app-background">
   <div class="container">
       <h2>Generate Random Chord Progressions</h2>
       <form class="form" (ngSubmit)="onSubmit()">
@@ -8,6 +8,10 @@
         </select>
         <br><br>
         <label><h5>Always Include Root Chord</h5></label><ui-switch size="small" color="#E85F55" [checked]="alwaysUseRoot" (change)="onToggleUseRoot($event)"></ui-switch>
+        <br><br>
+        <label><h5>Include Diminished Chords</h5></label><ui-switch size="small" color="#E85F55" [checked]="true" (change)="onToggleUseDiminishedChords($event)"></ui-switch>
+        <br><br>
+        <label><h5>Number of Chords</h5></label><mat-slider thumbLabel [displayWith]="formatLabel" min="2000" max="7000" step="1" value="3000"></mat-slider>
         <br><br>
         <div class="btn-group mood-buttons">
             <button (click)="setKeyMood('major')" class="btn btn-primary btn-small">Major <i class="fas fa-check" *ngIf="majorSelected"></i></button>

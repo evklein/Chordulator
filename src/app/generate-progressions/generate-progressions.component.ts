@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChordFinderService } from '../services/chord-finder.service';
 import { NgForm } from '@angular/forms';
 import { Chord } from '../models/chord.model';
+import { MatSlider } from '@angular/material/slider';
 
 @Component({
   selector: 'app-generate-progressions',
@@ -12,10 +13,11 @@ export class GenerateProgressionsComponent implements OnInit {
   majorSelected: boolean = true;
   minorSelected: boolean = false;
   randomKey: boolean = true;
+  useRoot: boolean = true;
   chords: Chord[] = [];
   progressionGenerated: boolean = false;
   keyNote: string;
-  keyMood: string;
+  keyMood: string = 'major';
   selectedKey: string = 'C';
 
   ionianChecked: boolean = true;
@@ -38,19 +40,16 @@ export class GenerateProgressionsComponent implements OnInit {
     let key = this.getKey();
 
     let keyChords: Chord[] = this.getAllChords(key);
-    // if (this.majorSelected) {
-    //   keyChords = this.chordFinderService.getChords(key, 'major');
-    //   this.keyMood = 'major';
-    // }
-    // else if (this.minorSelected) {
-    //   keyChords = this.chordFinderService.getChords(key, 'minor');
-    //   this.keyMood = 'minor';
-    // }
     const MIN_NUM_CHORDS = 2;
     const MAX_NUM_CHORDS = 5;
     let numOfChords = MIN_NUM_CHORDS + Math.floor(Math.random() * MAX_NUM_CHORDS); // 2 - 6 chords, add slider later for users. 
+    let rootChordIndex = Math.floor(Math.random() * numOfChords);
 
     for (let i = 0; i < numOfChords; i++) {
+      if (i == rootChordIndex && this.useRoot) {
+        this.chords.push(keyChords[0]);
+        continue;
+      }
       let randomChordIndex = Math.floor(Math.random() * keyChords.length);
       this.chords.push(keyChords[randomChordIndex]);
     }
@@ -117,6 +116,7 @@ export class GenerateProgressionsComponent implements OnInit {
   }
 
   private setKeyMood(mood: string) {
+    this.keyMood = mood;
     this.resetSwitches();
     if (mood === 'major') {
       this.minorSelected = false;
@@ -135,7 +135,6 @@ export class GenerateProgressionsComponent implements OnInit {
   
   onToggleRandomSwitch(event: boolean) {
     this.randomKey = event;
-    console.log(this.randomKey);
   }
 
   onToggleModeSwitch(mode: string) {
@@ -172,5 +171,9 @@ export class GenerateProgressionsComponent implements OnInit {
     this.mixolydianChecked = false;
     this.aeolianChecked = false;
     this.locrianChecked = false;
+  }
+
+  onToggleUseRoot(value: boolean) {
+    this.useRoot = value;
   }
 }

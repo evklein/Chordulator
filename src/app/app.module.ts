@@ -8,6 +8,8 @@ import { HeaderComponent } from './header/header.component';
 import { ChordsInKeyComponent } from './chords-in-key/chords-in-key.component';
 import { GenerateProgressionsComponent } from './generate-progressions/generate-progressions.component';
 import { ChordFinderService } from './services/chord-finder.service';
+import { MatSlider, MatSliderModule } from '@angular/material/slider';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'chords-in-key', pathMatch: 'full'},
@@ -24,8 +26,10 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
-    UiSwitchModule
+    UiSwitchModule,
+    MatSliderModule
   ],
   providers: [ChordFinderService, ],
   bootstrap: [AppComponent]
