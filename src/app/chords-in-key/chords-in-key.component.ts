@@ -11,15 +11,17 @@ export class ChordsInKeyComponent implements OnInit {
   keyNote: string;
   keyMood: string = 'major';
   isNormalValid: boolean = false;
-  isModalInterchangeMode: boolean = false;
+
   majorSelected: boolean = true;
   minorSelected: boolean = false;
-  chords: Chord[];
+  allModesSelected: boolean = false;
+  selectedMoodChords: Chord[];
+  ionianChords: Chord[];
   dorianChords: Chord[];
   phrygianChords: Chord[];
   lydianChords: Chord[];
   mixolydianChords: Chord[];
-  minorChords: Chord[];
+  aeolianChords: Chord[];
   locrianChords: Chord[];
 
   constructor(private chordFinderService: ChordFinderService) { }
@@ -31,16 +33,26 @@ export class ChordsInKeyComponent implements OnInit {
     this.getChordsIfValid();
   }
 
-  setKeyMood(mood: string) {
-    if (mood === 'major') {
+  setMode(mode: string) {
+    this.resetChords();
+    if (mode === 'ionian') {
+      console.log()
+      this.keyMood = 'major';
       this.majorSelected = true;
       this.minorSelected = false;
-    } else {
+      this.allModesSelected = false;
+    } else if (mode === 'aeolian') {
+      this.keyMood = 'minor';
       this.minorSelected = true;
       this.majorSelected = false;
+      this.allModesSelected = false;
+    } else if (mode === 'all') {
+      this.keyMood = '';
+      this.majorSelected = false;
+      this.minorSelected = false;
+      this.allModesSelected = true;
     }
-
-    this.keyMood = mood;
+    
     this.getChordsIfValid();
   }
 
@@ -48,44 +60,42 @@ export class ChordsInKeyComponent implements OnInit {
     if (!this.keyNote) {
       this.isNormalValid = false;
       return; // Don't post anything until user has added all the required information.
-    } else if (this.isModalInterchangeMode && this.keyNote) {
+    } else if (this.allModesSelected && this.keyNote) {
       this.setModalChords();
-    } else if (this.keyNote && this.keyMood && !this.isModalInterchangeMode) {
+    } else if (this.keyNote && this.keyMood && !this.allModesSelected) {
       this.isNormalValid = true;
       this.resetChords();
-      this.chords = this.chordFinderService.getChords(this.keyNote, this.keyMood);
-    }
-  }
 
-  onChange(event: string) {
-    if (event) {
-      this.isModalInterchangeMode = true;
-    } else {
-      this.isModalInterchangeMode = false;
-      return;
+      if (this.majorSelected) {
+        this.ionianChords = this.chordFinderService.getMajorChords(this.keyNote);
+        this.selectedMoodChords = this.ionianChords;
+      } else if (this.minorSelected) {
+        this.aeolianChords = this.chordFinderService.getMinorChords(this.keyNote);
+        this.selectedMoodChords = this.aeolianChords;
+      } else {
+        this.setModalChords();
+      }
     }
-
-    this.setModalChords();
   }
 
   setModalChords() {
     this.resetChords();
-    this.chords = this.chordFinderService.getChords(this.keyNote, 'major');
+    this.ionianChords = this.chordFinderService.getMajorChords(this.keyNote);
     this.dorianChords = this.chordFinderService.getDorianChords(this.keyNote);
     this.phrygianChords = this.chordFinderService.getPhygianChords(this.keyNote);
     this.lydianChords = this.chordFinderService.getLydianChords(this.keyNote);
     this.mixolydianChords = this.chordFinderService.getMixolydianChords(this.keyNote);
-    this.minorChords = this.chordFinderService.getMinorChords(this.keyNote);
+    this.aeolianChords = this.chordFinderService.getMinorChords(this.keyNote);
     this.locrianChords = this.chordFinderService.getLocrianChords(this.keyNote);
   }
 
   resetChords() {
-    this.chords = [];
+    this.ionianChords = [];
     this.dorianChords = [];
     this.phrygianChords = [];
     this.lydianChords = [];
     this.mixolydianChords = [];
-    this.minorChords = [];
+    this.aeolianChords = [];
     this.locrianChords = [];
   }
 }

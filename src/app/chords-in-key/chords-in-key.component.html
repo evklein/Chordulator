@@ -2,78 +2,87 @@
   <div class="container">
     <h4>Select Key Note</h4>
     <div class="input-group">
-      <div class="btn-group">
-          <button (click)="setKeyNote('C')" class="btn btn-primary btn-lg" style="background-color: red; border: 0px #E85F55">C</button>
-          <button (click)="setKeyNote('C#')" class="btn btn-primary btn-lg" style="background-color: orangered; border: 0px #E85F55">C#/D♭</button>
-          <button (click)="setKeyNote('D')" class="btn btn-primary btn-lg" style="background-color: #FFD300; border: 0px #E85F55">D</button>
-          <button (click)="setKeyNote('D#')" class="btn btn-primary btn-lg" style="background-color: yellowgreen; border: 0px #E85F55">D#/E♭</button>
-          <button (click)="setKeyNote('E')" class="btn btn-primary btn-lg" style="background-color: green; border: 0px #E85F55">E</button>
-          <button (click)="setKeyNote('F')" class="btn btn-primary btn-lg" style="background-color: lightskyblue; border: 0px #E85F55">F</button>
-          <button (click)="setKeyNote('F#')" class="btn btn-primary btn-lg" style="background-color: blue; border: 0px #E85F55">F#/G♭</button>
-          <button (click)="setKeyNote('G')" class="btn btn-primary btn-lg" style="background-color: indigo; border: 0px #E85F55">G</button>
-          <button (click)="setKeyNote('G#')" class="btn btn-primary btn-lg" style="background-color: purple; border: 0px #E85F55">G#/A♭</button>
-          <button (click)="setKeyNote('A')" class="btn btn-primary btn-lg" style="background-color: blueviolet; border: 0px #E85F55">A</button>
-          <button (click)="setKeyNote('A#')" class="btn btn-primary btn-lg" style="background-color: coral; border: 0px #E85F55">A#/B♭</button>
-          <button (click)="setKeyNote('B')" class="btn btn-primary btn-lg" style="background-color: pink; border: 0px #E85F55">B</button>
+      <div class="">
+          <button (click)="setKeyNote('C')" class="btn btn-primary btn-lg btnKey nonEnharmonic" >C</button>
+          <button (click)="setKeyNote('G')" class="btn btn-primary btn-lg btnKey nonEnharmonic" >G</button>
+          <button (click)="setKeyNote('D')" class="btn btn-primary btn-lg btnKey nonEnharmonic">D</button>
+          <button (click)="setKeyNote('A')" class="btn btn-primary btn-lg btnKey nonEnharmonic">A</button>
+          <button (click)="setKeyNote('E')" class="btn btn-primary btn-lg btnKey nonEnharmonic">E</button>
+          <div class="btn-group-vertical">
+            <button (click)="setKeyNote('B')" class="btn btn-primary btn-lg btnKey">B</button>
+            <button (click)="setKeyNote('C♭')" class="btn btn-primary btn-lg btnKey">C♭</button>
+          </div>
+          <div class="btn-group-vertical">
+            <button (click)="setKeyNote('F#')" class="btn btn-primary btn-lg btnKey">F#</button>
+            <button (click)="setKeyNote('G♭')" class="btn btn-primary btn-lg btnKey">G♭</button>
+          </div>
+          <div class="btn-group-vertical">
+            <button (click)="setKeyNote('C#')" class="btn btn-primary btn-lg btnKey">C#</button>
+            <button (click)="setKeyNote('D♭')" class="btn btn-primary btn-lg btnKey">D♭</button>
+          </div>
+          <button (click)="setKeyNote('A♭')" class="btn btn-primary btn-lg btnKey nonEnharmonic">A♭</button>
+          <button (click)="setKeyNote('E♭')" class="btn btn-primary btn-lg btnKey nonEnharmonic">E♭</button>
+          <button (click)="setKeyNote('B♭')" class="btn btn-primary btn-lg btnKey nonEnharmonic">B♭</button>
+          <button (click)="setKeyNote('F')" class="btn btn-primary btn-lg btnKey nonEnharmonic">F</button>
       </div>
     </div>
     <h4>Select Key Mood</h4>
     <div class="input-group">
         <div class="btn-group mood-buttons">
-            <button (click)="setKeyMood('major')" class="btn btn-primary btn-lg">Major <i class="fas fa-check" *ngIf="majorSelected"></i></button>
-            <button (click)="setKeyMood('minor')" class="btn btn-info btn-lg">Minor <i class="fas fa-check" *ngIf="minorSelected"></i></button>
-        </div>
-        <ui-switch size="small" color="#E85F55" (change)="onChange($event)"></ui-switch><label><h5>Modal Interchange Mode</h5></label>
+            <button (click)="setMode('ionian')" class="btn btn-primary btn-lg">Major <i class="fas fa-check" *ngIf="majorSelected"></i></button>
+            <button (click)="setMode('aeolian')" class="btn btn-info btn-lg">Minor <i class="fas fa-check" *ngIf="minorSelected"></i></button>
+            <button (click)="setMode('all')" class="btn btn-warning btn-lg">Show all modes <i class="fas fa-check" *ngIf="allModesSelected"></i></button>
+        </div>    
     </div>
-    <div class="" *ngIf="isNormalValid && !isModalInterchangeMode">
+    <div class="" *ngIf="isNormalValid && !allModesSelected">
       <br>
       <h3>Chords in the key of <b><i>{{ keyNote }} {{ keyMood }}:</i></b></h3>
-      <div class="chord-container normal-mode" *ngFor="let chord of chords">
-          <p class="chordName"><b>{{ chord.getKeyNote() }}{{ chord.getKeyMood() }}</b></p>
+      <div class="chord-container normal-mode" *ngFor="let chord of selectedMoodChords">
+          <p class="chordName"><b>{{ chord.getKeyNote() }}<span style="font-size: 14px;">{{ chord.getKeyMood() }}</span></b></p>
           <p class="number"><b>{{ chord.getChordNumber() }}</b></p>
       </div>
     </div>
-    <div class="" *ngIf="isModalInterchangeMode && keyNote">
+    <div class="" *ngIf="allModesSelected && keyNote">
       <h3>Chords in every mode of <b><i>{{ keyNote }}:</i></b></h3>
       <br>
-      <div class="chord-container major" *ngFor="let chord of chords">
-        <p class="chordName"><b>{{ chord.getKeyNote() }}{{ chord.getKeyMood() }}</b></p>
+      <div class="chord-container major" *ngFor="let chord of ionianChords">
+        <p class="chordName"><b>{{ chord.getKeyNote() }}<span style="font-size: 14px;">{{ chord.getKeyMood() }}</span></b></p>
         <p class="number"><b>{{ chord.getChordNumber() }}</b></p>
         <p class="mode">Ionian</p>
       </div>
       <br>
       <div class="chord-container dorian" *ngFor="let chord of dorianChords">
-        <p class="chordName"><b>{{ chord.getKeyNote() }}{{ chord.getKeyMood() }}</b></p>
+        <p class="chordName"><b>{{ chord.getKeyNote() }}<span style="font-size: 14px;">{{ chord.getKeyMood() }}</span></b></p>
         <p class="number"><b>{{ chord.getChordNumber() }}</b></p>
         <p class="mode">Dorian</p>
       </div>
       <br>
       <div class="chord-container phrygian" *ngFor="let chord of phrygianChords">
-        <p class="chordName"><b>{{ chord.getKeyNote() }}{{ chord.getKeyMood() }}</b></p>
+        <p class="chordName"><b>{{ chord.getKeyNote() }}<span style="font-size: 14px;">{{ chord.getKeyMood() }}</span></b></p>
         <p class="number"><b>{{ chord.getChordNumber() }}</b></p>
         <p class="mode">Phrygian</p>
       </div>
       <br>
       <div class="chord-container lydian" *ngFor="let chord of lydianChords">
-        <p class="chordName"><b>{{ chord.getKeyNote() }}{{ chord.getKeyMood() }}</b></p>
+        <p class="chordName"><b>{{ chord.getKeyNote() }}<span style="font-size: 14px;">{{ chord.getKeyMood() }}</span></b></p>
         <p class="number"><b>{{ chord.getChordNumber() }}</b></p>
         <p class="mode">Lydian</p>
       </div>
       <br>
       <div class="chord-container mixolydian" *ngFor="let chord of mixolydianChords">
-        <p class="chordName"><b>{{ chord.getKeyNote() }}{{ chord.getKeyMood() }}</b></p>
+        <p class="chordName"><b>{{ chord.getKeyNote() }}<span style="font-size: 14px;">{{ chord.getKeyMood() }}</span></b></p>
         <p class="number"><b>{{ chord.getChordNumber() }}</b></p>
         <p class="mode">Mixolydian</p>
       </div>
       <br>
-      <div class="chord-container minor" *ngFor="let chord of minorChords">
-        <p class="chordName"><b>{{ chord.getKeyNote() }}{{ chord.getKeyMood() }}</b></p>
+      <div class="chord-container minor" *ngFor="let chord of aeolianChords">
+        <p class="chordName"><b>{{ chord.getKeyNote() }}<span style="font-size: 14px;">{{ chord.getKeyMood() }}</span></b></p>
         <p class="number"><b>{{ chord.getChordNumber() }}</b></p>
         <p class="mode">Aeolian</p>
       </div>
       <br>
       <div class="chord-container locrian" *ngFor="let chord of locrianChords">
-        <p class="chordName"><b>{{ chord.getKeyNote() }}{{ chord.getKeyMood() }}</b></p>
+        <p class="chordName"><b>{{ chord.getKeyNote() }}<span style="font-size: 14px;">{{ chord.getKeyMood() }}</span></b></p>
         <p class="number"><b>{{ chord.getChordNumber() }}</b></p>
         <p class="mode">Locrian</p>
       </div>

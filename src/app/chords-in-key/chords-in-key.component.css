@@ -6,6 +6,19 @@ body {
     overflow-y: hidden;
 }
 
+.btnKey {
+    background-color: #254E58;
+    border-color: #254E58;
+    color: white;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.btn-group-vertical {
+    margin-right: 5px;
+}
+
 .chords-in-key {
     background-color: #E85F55;
 }
